@@ -21,8 +21,8 @@ class MRTaxi(MRJob):
          dropoff_longitude, dropoff_latitude, payment_type, fare_amount, extra, mta_tax, tip_amount,
          tolls_amount, improvement_surcharge, total_amount) = line.split(',')
 
-        pickup_latitude = pickup_latitude[:8]
-        pickup_longitude = pickup_longitude[:9]
+        pickup_latitude = pickup_latitude[:6]
+        pickup_longitude = pickup_longitude[:7]
         yield (float(pickup_latitude), float(pickup_longitude)), 1
 
     def combiner(self, key, values):
