@@ -16,7 +16,7 @@ class MRTaxi(MRJob):
          trip_distance, RatecodeID, store_and_fwd_flag, PULocationID, DOLocationID,
          payment_type, fare_amount, extra, mta_tax, tip_amount, tolls_amount,
          improvement_surcharge, total_amount) = line.split(',')
-        yield None, trip_distance
+        yield None, float(trip_distance)
     def combiner(self, key, values):
         total_distance = 0
         num = 0
@@ -31,7 +31,7 @@ class MRTaxi(MRJob):
         for value in values:
             total_distance += value[0]
             num += value[1]
-        yield key, (total_distance, num)
+        yield key, total_distance/num
 
 if __name__=='__main__':
     MRTaxi.run()
